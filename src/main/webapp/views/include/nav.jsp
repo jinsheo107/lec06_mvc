@@ -18,6 +18,9 @@
 			<div class="menu">
 				<ul>
 					<li>
+						<a href="/board/create">게시글 등록</a>
+					</li>
+					<li>
 						<a href="/user/logout">로그아웃</a>
 					</li>
 					<li>
