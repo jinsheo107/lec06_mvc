@@ -10,6 +10,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 
+// 한국어 UTF-8 인코딩
 @WebFilter("/*")
 public class EncodingFilter extends HttpFilter implements Filter {
 

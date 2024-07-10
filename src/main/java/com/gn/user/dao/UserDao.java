@@ -40,12 +40,40 @@ public class UserDao {
 			}
 			
 		} catch(Exception e) {
-			
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
+			close(rs);
 		}
 		
+		return result;
+	}
+	
+	public User loginUser(String id, String pw, Connection conn) {
+		User result = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT * FROM `user` WHERE `user_id` = ? AND  `user_pw` = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = new User(rs.getInt("user_no"), rs.getString("user_id"),
+						rs.getString("user_pw"), rs.getString("user_name"));
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
 		return result;
 	}
 }
