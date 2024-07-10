@@ -13,7 +13,7 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 
 // 비밀번호 암호화를 사용할 페이지 설정
-@WebFilter(servletNames= {"userCreateEnd", "userLoginEnd"})
+@WebFilter(servletNames= {"userCreateEnd", "userLoginEnd", "userEditEnd"})
 public class EncryptFilter extends HttpFilter implements Filter {
 
     public EncryptFilter() {
