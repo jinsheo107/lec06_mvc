@@ -17,7 +17,7 @@
 			</div>
 			<br>
 			<div class="register_book_form">
-				<form action='/book/createEnd' name="create_board_form"
+				<form action='/board/createEnd' name="create_board_form"
 					method="post" enctype="multipart/form-data">
 					<input type="text" name="board_title" placeholder="제목을 입력하세요.">
 					<br> <input type="text" name="board_content"
