@@ -32,7 +32,9 @@
 		</div>
 	</section>
 	<script type="text/javascript">
-		
+		function editUserForm() = {
+				
+		}
 	</script>
 </body>
 </html>
