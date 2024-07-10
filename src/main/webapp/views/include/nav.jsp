@@ -24,7 +24,7 @@
 						<a href="/user/logout">로그아웃</a>
 					</li>
 					<li>
-						<a href="#">계정수정</a>
+						<a href="/user/edit">계정수정</a>
 					</li>
 				</ul>
 			</div>
