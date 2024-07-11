@@ -2,7 +2,10 @@ package com.gn.board.vo;
 
 import java.time.LocalDateTime;
 
-public class Board {
+import com.gn.common.Paging;
+
+// 보드 리스트 서블릿에서 목록을 추출해 낼 때 보드 데이터를 옵션으로 넘겨주는 데 이때 Paging 데이터도 함께 보내기 위해 extends(상속)을 해준다
+public class Board extends Paging{
 	private int board_no;
 	private String board_title;
 	private String board_content;

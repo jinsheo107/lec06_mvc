@@ -29,7 +29,7 @@ public class BoardListServlet extends HttpServlet {
 		option.setBoard_title(title);
 		
 		// 전체 목록 개수 -> 페이징바 구성
-		
+		option.setTotalData(new BoardService().selectBoardCount(option));
 
 		List<Board> list = new BoardService().selectBoardList(option);
 		

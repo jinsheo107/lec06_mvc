@@ -73,4 +73,25 @@ public class BoardDao {
 		}
 		return list;
 	}
+	
+	public int selectBoardCount(Board option, Connection conn) {
+		int result = -1;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql = "SELECT COUNT(*) cnt FROM `board`";
+			
+			
+			pstmt = conn.prepareStatement(sql);
+			
+ 		} catch(Exception e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			close(pstmt);
+ 			close(rs);
+ 		}
+		
+		return result;
+	}
 }
