@@ -25,4 +25,11 @@ public class UserService {
 		
 		return result;
 	}
+	
+	public int editUser(String pw, String name, int userNo) {
+		Connection conn = getConnection();
+		
+		int result = new UserDao().eidtUser(pw, name, userNo, conn);
+		return result;
+	}
 }

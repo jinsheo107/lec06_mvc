@@ -76,4 +76,27 @@ public class UserDao {
 		}
 		return result;
 	}
+	
+	public int eidtUser(String pw, String name, int userNo, Connection conn) {
+		int result = -1;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "UPDATE `user` SET `user_pw` = ?, `user_name` = ? WHERE `user_no` = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pw);
+			pstmt.setString(2, name);
+			pstmt.setInt(3, userNo);
+			
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
