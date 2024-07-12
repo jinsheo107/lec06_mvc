@@ -28,14 +28,20 @@ public class BoardListServlet extends HttpServlet {
 		Board option = new Board();
 		option.setBoard_title(title);
 		
+		String nowPage = request.getParameter("nowPage");
+		if(nowPage != null) {
+			option.setNowPage(Integer.parseInt(nowPage));
+		}
+		
 		// 전체 목록 개수 -> 페이징바 구성
 		option.setTotalData(new BoardService().selectBoardCount(option));
 
 		List<Board> list = new BoardService().selectBoardList(option);
 		
-		RequestDispatcher view = request.getRequestDispatcher("/views/board/list.jsp");
+		request.setAttribute("paging", option);
 		request.setAttribute("resultList", list);
-		view.forward(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("/views/board/list.jsp");
+		rd.forward(request, response);
 
 	}
 

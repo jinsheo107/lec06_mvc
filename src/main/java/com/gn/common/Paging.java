@@ -32,6 +32,7 @@ public class Paging {
 	}
 	public void setTotalData(int totalData) {
 		this.totalData = totalData;
+		calcPaging();
 	}
 	public int getTotalPage() {
 		return totalPage;
@@ -89,25 +90,25 @@ public class Paging {
 	}
 	
 	// 전체 게시글 개수 set 해줬을 때 동작할 메소드
-	private void clacPaging() {
-		// 2번 페이지(11 ~ 20) -> 10, 10
-		// 3번 페이지(21 ~ 30) -> 20, 10
-		limitPageNo = (nowPage - 1) * numPerPage;
-				
+	private void calcPaging() {
+		// 2번 페이지(11~20) -> 10,10
+		// 3번 페이지(21~30) -> 20,10
+		limitPageNo = (nowPage-1)*numPerPage;
 		// 전체 페이지 개수(26 -> 3개 페이지)
-		// 26 / 20 -> 몫 -> 26개를 10개씩 묶었을 때 몇 묶음? -> 2
-		// 26.0 / 10 -> 2.6 -> 3
+		// 26/10 -> 몫 -> 26개를 10개씩 묶었을때 몇 묶음? ->2
+		// 26.0/10 -> 2.6 -> 3
 		totalPage = (int)Math.ceil((double)totalData/numPerPage);
 		
-		// 3번 페이지 -> 1번
-		// 8번 페이지 -> 6번
-		pageBarStart = ((nowPage - 1) / pageBarSize) * pageBarSize + 1;
-		pageBarEnd = pageBarStart + pageBarSize - 1;
+		// 3번페이지 -> 1번
+		// 8번페이지 -> 6번
+		pageBarStart = ((nowPage-1)/pageBarSize)*pageBarSize +1;
+		pageBarEnd = pageBarStart + pageBarSize -1;
 		if(pageBarEnd > totalPage) pageBarEnd = totalPage;
 		
 		// 이전, 다음
 		if(pageBarStart == 1) prev = false;
 		if(pageBarEnd >= totalPage) next = false;
+		
 	}
 	
 	
