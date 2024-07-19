@@ -7,16 +7,16 @@ public class Paging {
 	// 전체 페이지 개수
 	private int totalPage;
 	
-	// 페이징바 크기
+	// 페이징 바 크기
 	private int pageBarSize = 5;
-	// 페이징바 페이지 시작, 끝
+	// 페이징 바 시작과 끝
 	private int pageBarStart;
 	private int pageBarEnd;
 	
 	// 현재 페이지
 	private int nowPage = 1;
-	// 목록에 보여질 게시글 개수
-	private int numPerPage = 10;
+	// 목록에 보여질 게시글 개수 설정
+	private int numPerPage = 5;
 	// 쿼리에 사용할 LIMIT 값
 	private int limitPageNo;
 	
@@ -85,25 +85,26 @@ public class Paging {
 	public void setNext(boolean next) {
 		this.next = next;
 	}
-
-	// 전체 게시글 개수 set 해줬을때 동작할 메소드
+	
+	// 전체 게시글 개수를 set 해줬을 때 동작할 메소드
 	private void calcPaging() {
 		// 2번 페이지(11~20) -> 10,10
-		// 3번 페이지(21~30) -> 20,10
 		limitPageNo = (nowPage-1)*numPerPage;
-		// 전체 페이지 개수(26 -> 3개 페이지)
-		// 26/10 -> 몫 -> 26개를 10개씩 묶었을때 몇 묶음? ->2
-		// 26.0/10 -> 2.6 -> 3
+		// 전체 페이지 개수 조회 26.0/10 -> 2.6 -> 3
 		totalPage = (int)Math.ceil((double)totalData/numPerPage);
 		
-		// 3번페이지 -> 1번
-		// 8번페이지 -> 6번
-		pageBarStart = ((nowPage-1)/pageBarSize)*pageBarSize +1;
-		pageBarEnd = pageBarStart + pageBarSize -1;
+		// 페이지 바 시작 번호 설정 = 3번 페이지에 있을 경우 1번 8번 ->6번
+		pageBarStart = ((nowPage-1)/pageBarSize)*pageBarSize+1;
+		// 페이지 바 끝 번호 설정
+		pageBarEnd = pageBarStart+pageBarSize-1;
 		if(pageBarEnd > totalPage) pageBarEnd = totalPage;
 		
 		// 이전, 다음
 		if(pageBarStart == 1) prev = false;
 		if(pageBarEnd >= totalPage) next = false;
 		
-	}}
+		// 적용 = // Board클래스에다 paging 클래스 상속받기
+		
+	}
+
+}

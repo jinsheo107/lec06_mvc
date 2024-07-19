@@ -48,6 +48,9 @@ public class BoardDao {
 			if(option.getBoard_title() != null) {
 				sql += " WHERE board_title LIKE CONCAT('%', '" + option.getBoard_title() + "' , '%')";
 			} 
+			
+			sql += " LIMIT "+option.getLimitPageNo()+", "+option.getNumPerPage();
+			
 			pstmt = conn.prepareStatement(sql);			
 			rs = pstmt.executeQuery();
 			
@@ -80,10 +83,19 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			String sql = "SELECT COUNT(*) cnt FROM `board`";
+			String sql = "SELECT COUNT(*) AS cnt FROM board";
+			
+			if(option.getBoard_title() != null) {
+				sql += " WHERE board_title LIKE CONCAT('%','"+option.getBoard_title()+"','%')";
+			}
 			
 			
 			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt("cnt");
+			}
 			
  		} catch(Exception e) {
  			e.printStackTrace();

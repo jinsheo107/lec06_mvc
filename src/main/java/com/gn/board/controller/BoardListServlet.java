@@ -16,31 +16,34 @@ import com.gn.board.vo.Board;
 @WebServlet("/board/list")
 public class BoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+    
+    public BoardListServlet() {
+        super();
+    }
 
-	public BoardListServlet() {
-		super();
-	}
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter("board_title");
-
 		Board option = new Board();
 		option.setBoard_title(title);
 		
-		// 전체 목록 개수 -> 페이징바 구성
+		// 현재 페이지 넘버 받아오기
+		String nowPage = request.getParameter("nowPage");
+		if(nowPage != null) {
+			option.setNowPage(Integer.parseInt(nowPage));
+		}
+		// 전체 목록 개수 조회해서 페이징 바 구성
 		option.setTotalData(new BoardService().selectBoardCount(option));
-
-		List<Board> list = new BoardService().selectBoardList(option);
 		
-		RequestDispatcher view = request.getRequestDispatcher("/views/board/list.jsp");
+		List<Board> list = new BoardService().selectBoardList(option);
+//		list = request.getParameter("resultList");
+		// 데이터 보내기
+		request.setAttribute("paging", option);
 		request.setAttribute("resultList", list);
+		RequestDispatcher view = request.getRequestDispatcher("/views/board/list.jsp");
 		view.forward(request, response);
-
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 

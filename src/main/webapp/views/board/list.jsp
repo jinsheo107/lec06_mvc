@@ -35,7 +35,6 @@
 						<%@page import="com.gn.board.vo.Board, java.util.*" %>
 						<%
 							List<Board> list = (List<Board>)request.getAttribute("resultList");
-							
 							for(int i = 0 ; i < list.size(); i++){ %>
 								<tr>
 									<td><%=list.get(i).getBoard_no()%></td>
@@ -49,5 +48,28 @@
 			</div>
 		</div>
 	</section>	
+	<% Board paging = (Board)request.getAttribute("paging"); %>
+	<% if(paging !=null){ %>
+		<div class="center">
+			<div class="pagination">
+				<!-- 이전 버튼이 활성화 되었을시 해당 코드 실행 -->
+				<% if(paging.isPrev()){ %>
+					<!-- ?는 값도 같이 보내겠다는 의미이다. get만 가능 -->
+					<!-- nowPage의 값을 현재 페이지-1한 값(이전 페이지) 로 보내겠다는 뜻 -->
+					<a href="/board/list?nowPage=<%=(paging.getPageBarStart()-1)%>">&laquo;</a>
+				<%} %>
+				<% for(int i = paging.getPageBarStart(); i <= paging.getPageBarEnd(); i++){ %>
+					<a href="/board/list?nowPage=<%=i%>"<%=paging.getNowPage() == i ? "class='active'" : "" %>>
+						<%=i %>
+					</a>
+				<%} %>
+				<!-- 다음 버튼이 활성화 되었을시 해당 코드 실행 -->
+				<%if(paging.isNext()){ %>
+					<a href="/board/list?nowPage=<%=(paging.getPageBarEnd()+1)%>">&raquo;</a>
+				<%} %>
+			</div>
+		</div>
+		
+	<%} %>
 </body>
 </html>

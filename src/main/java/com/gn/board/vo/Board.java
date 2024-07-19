@@ -15,7 +15,6 @@ public class Board extends Paging{
 	private String ori_thumbnail;
 	private String new_thumbnail;
 	
-	
 	public Board() {
 		super();
 	}
@@ -99,9 +98,9 @@ public class Board extends Paging{
 
 	@Override
 	public String toString() {
-		return board_no + " || " + board_title + " || " + board_content
-				+ " || " + board_writer + " || " + reg_date + " || =" + mod_date
-				+ " || " + ori_thumbnail + " || " + new_thumbnail;
+		return "Board [board_no=" + board_no + ", board_title=" + board_title + ", board_content=" + board_content
+				+ ", board_writer=" + board_writer + ", reg_date=" + reg_date + ", mod_date=" + mod_date
+				+ ", ori_thumbnail=" + ori_thumbnail + ", new_thumbnail=" + new_thumbnail + "]";
 	}
-		
+	
 }
